@@ -2,7 +2,7 @@
  * Incremental values that represent the state of different winning
  * combinations.
  */
-export const comb = new Uint8Array(8)
+export const combinations = new Uint8Array(8)
 
 /**
  * Checks if the current player's move results in a winning combination.
@@ -19,54 +19,54 @@ export function check(expected: number, index: number): boolean {
 	switch (index) {
 		case 0:
 			return (
-				expected === (comb[0] += v) ||
-				expected === (comb[1] += v) ||
-				expected === (comb[2] += v)
+				expected === (combinations[0] += v) ||
+				expected === (combinations[1] += v) ||
+				expected === (combinations[2] += v)
 			)
 		case 1:
 			return (
-				expected === (comb[0] += v) ||
-				expected === (comb[3] += v)
+				expected === (combinations[0] += v) ||
+				expected === (combinations[3] += v)
 			)
 		case 2:
 			return (
-				expected === (comb[0] += v) ||
-				expected === (comb[4] += v) ||
-				expected === (comb[5] += v)
+				expected === (combinations[0] += v) ||
+				expected === (combinations[4] += v) ||
+				expected === (combinations[5] += v)
 			)
 		case 3:
 			return (
-				expected === (comb[1] += v) ||
-				expected === (comb[6] += v)
+				expected === (combinations[1] += v) ||
+				expected === (combinations[6] += v)
 			)
 		case 4:
 			return (
-				expected === (comb[2] += v) ||
-				expected === (comb[3] += v) ||
-				expected === (comb[4] += v) ||
-				expected === (comb[6] += v)
+				expected === (combinations[2] += v) ||
+				expected === (combinations[3] += v) ||
+				expected === (combinations[4] += v) ||
+				expected === (combinations[6] += v)
 			)
 		case 5:
 			return (
-				expected === (comb[5] += v) ||
-				expected === (comb[6] += v)
+				expected === (combinations[5] += v) ||
+				expected === (combinations[6] += v)
 			)
 		case 6:
 			return (
-				expected === (comb[1] += v) ||
-				expected === (comb[4] += v) ||
-				expected === (comb[7] += v)
+				expected === (combinations[1] += v) ||
+				expected === (combinations[4] += v) ||
+				expected === (combinations[7] += v)
 			)
 		case 7:
 			return (
-				expected === (comb[3] += v) ||
-				expected === (comb[7] += v)
+				expected === (combinations[3] += v) ||
+				expected === (combinations[7] += v)
 			)
 	}
 
 	return (
-		expected === (comb[2] += v) ||
-		expected === (comb[5] += v) ||
-		expected === (comb[7] += v)
+		expected === (combinations[2] += v) ||
+		expected === (combinations[5] += v) ||
+		expected === (combinations[7] += v)
 	)
 }
