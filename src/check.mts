@@ -1,62 +1,61 @@
-import { state } from "./state.mjs"
+export const comb = new Uint8Array(8)
 
-export function check(expected: number, move: number): boolean {
-	expected += 4
+export function check(expected: number, index: number): boolean {
+	const v = (expected += 4)
+
 	expected += expected << 1
 
-	switch (move) {
+	switch (index) {
 		case 0:
 			return (
-				expected === state[0] + state[1] + state[2] ||
-				expected === state[0] + state[3] + state[6] ||
-				expected === state[0] + state[4] + state[8]
+				expected === (comb[0] += v) ||
+				expected === (comb[1] += v) ||
+				expected === (comb[2] += v)
 			)
 		case 1:
 			return (
-				expected === state[0] + state[1] + state[2] ||
-				expected === state[1] + state[4] + state[7]
+				expected === (comb[0] += v) ||
+				expected === (comb[3] += v)
 			)
 		case 2:
 			return (
-				expected === state[0] + state[1] + state[2] ||
-				expected === state[2] + state[4] + state[6] ||
-				expected === state[2] + state[5] + state[8]
+				expected === (comb[0] += v) ||
+				expected === (comb[4] += v) ||
+				expected === (comb[5] += v)
 			)
 		case 3:
 			return (
-				expected === state[0] + state[3] + state[6] ||
-				expected === state[3] + state[4] + state[5]
+				expected === (comb[1] += v) ||
+				expected === (comb[6] += v)
 			)
 		case 4:
 			return (
-				expected === state[0] + state[4] + state[8] ||
-				expected === state[1] + state[4] + state[7] ||
-				expected === state[2] + state[4] + state[6] ||
-				expected === state[3] + state[4] + state[5]
+				expected === (comb[2] += v) ||
+				expected === (comb[3] += v) ||
+				expected === (comb[4] += v) ||
+				expected === (comb[6] += v)
 			)
 		case 5:
 			return (
-				expected === state[2] + state[5] + state[8] ||
-				expected === state[3] + state[4] + state[5]
+				expected === (comb[5] += v) ||
+				expected === (comb[6] += v)
 			)
 		case 6:
 			return (
-				expected === state[0] + state[3] + state[6] ||
-				expected === state[2] + state[4] + state[6] ||
-				expected === state[6] + state[7] + state[8]
+				expected === (comb[1] += v) ||
+				expected === (comb[4] += v) ||
+				expected === (comb[7] += v)
 			)
 		case 7:
 			return (
-				expected === state[1] + state[4] + state[7] ||
-				expected === state[6] + state[7] + state[8]
-			)
-		case 8:
-			return (
-				expected === state[0] + state[4] + state[8] ||
-				expected === state[2] + state[5] + state[8] ||
-				expected === state[6] + state[7] + state[8]
+				expected === (comb[3] += v) ||
+				expected === (comb[7] += v)
 			)
 	}
 
-	return false
+	return (
+		expected === (comb[2] += v) ||
+		expected === (comb[5] += v) ||
+		expected === (comb[7] += v)
+	)
 }

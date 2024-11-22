@@ -1,6 +1,6 @@
 #!node
 
-import { check } from "./check.mjs"
+import { check, comb } from "./check.mjs"
 import { generate } from "./generate.mjs"
 import { indices } from "./keys.mjs"
 import { read } from "./stdin.mjs"
@@ -12,6 +12,7 @@ const win_message = ai ? ["You win.", "You lose."] : ["x wins.", "0 wins."]
 
 do {
 	tic_tac_toe()
+	comb.fill(0)
 	state.fill(0)
 	process.stdout.write(`Press <RETURN> to continue.\n`)
 } while (read() === -35)
