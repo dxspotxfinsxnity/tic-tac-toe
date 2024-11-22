@@ -1,1 +1,1 @@
-export const state = new Int8Array(9)
+export const state = new Uint8Array(9)
