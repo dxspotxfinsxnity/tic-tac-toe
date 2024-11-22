@@ -1,15 +1,34 @@
-# tic-tac-toe
+# Tic-Tac-Toe
 
-```
-$ deno run src/main.mts --ai
- 0  |  x  |  0
- 0  |  x  |  x
- x  |  0  |  x
-Tie.
-Press <BACKSPACE> to exit.
+## How to Launch
+
+```sh
+deno run --allow-read src/main.mts
 ```
 
-# Controls
+## Preview
+
+```
+&Jo1n;
+Comm4nd_Center{};
+Head_to_HEAd[2];
+> Lone_Wolf;
+++eXit_;
+```
+
+```
+[7] | [8] | [9]
+[4] | [5] | [6]
+[1] | [2] | [3]
+```
+
+```
+ 0  | [8] | [9]
+ 0  |  x  | [6]
+[1] | [2] |  x
+```
+
+## Controls
 
 Board.
 
@@ -17,8 +36,4 @@ Board.
 - <kbd>4</kbd> <kbd>5</kbd> <kbd>6</kbd>
 - <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd>
 
-<kbd>BACKSPACE</kbd> to exit, any other key to restart.
-
-# AI
-
-Enable AI with the `--ai` switch.
+<kbd>BACKSPACE</kbd> to exit current screen, any other key to restart.
