@@ -1,10 +1,10 @@
-import { readSync } from "node:fs"
+Deno.stdin.setRaw(true)
 
-process.stdin.setRawMode(true)
+export const stdin = new Uint8Array(3)
 
-const stdin = Buffer.alloc(1)
+export let readCount: number | null
 
-export function read() {
-	readSync(process.stdin.fd, stdin, 0, 1, null)
-	return stdin[0] - 48
+export function readSync(): boolean {
+	readCount = Deno.stdin.readSync(stdin)
+	return readCount === null
 }

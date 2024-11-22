@@ -1,23 +1,25 @@
 #!node
 
-import { check, comb } from "./check.mjs"
-import { generate } from "./generate.mjs"
-import { indices } from "./keys.mjs"
-import { read } from "./stdin.mjs"
-import { render } from "./render.mjs"
-import { state } from "./state.mjs"
+import process from "node:process"
+import { check, comb } from "./check.mts"
+import { generate } from "./generate.mts"
+import { indices } from "./keys.mts"
+import { render } from "./render.mts"
+import { state } from "./state.mts"
+import { readSync, stdin, readCount } from "./stdin.mts"
 
 const ai = process.argv.includes("--ai", 2)
 const win_message = ai ? ["You win.", "You lose."] : ["x wins.", "0 wins."]
 
 do {
-	tic_tac_toe()
+	if (tic_tac_toe()) break
 	comb.fill(0)
 	state.fill(0)
-	process.stdout.write(`Press <RETURN> to continue.\n`)
-} while (read() === -35)
+	process.stdout.write(`Press <BACKSPACE> to exit.\n`)
+	readSync()
+} while (readCount !== 1 || stdin[0] !== 127)
 
-function tic_tac_toe(): void {
+function tic_tac_toe(): boolean {
 	let current = 0
 	let move = 0
 
@@ -25,18 +27,31 @@ function tic_tac_toe(): void {
 		process.stdout.write(`\x1bc${render()}`)
 		if (ai && current !== 0) move = generate()
 		else {
-			const input = read()
-			if (input < 1 || input > 9) continue
-			move = indices[input]
-			if (state[move] !== 0) continue
+			move = input()
+			if (move === -1) return true
 		}
 		state[move] = current + 4
 		const c = current
 		current = ~current
 		if (!check(c, move)) continue
 		process.stdout.write(`\x1bc${render()}\n${win_message[-c]}\n`)
-		return
+		return false
 	} while (state.includes(0))
 
 	process.stdout.write(`\x1bc${render()}\nTie.\n`)
+	return false
+}
+
+function input(): number {
+	let i
+
+	do {
+		if (readSync() || (readCount === 1 && stdin[0] === 127))
+			return -1
+		i = stdin[0] - 48
+		if (i < 1 || i > 9) continue
+		i = indices[i]
+	} while (state[i] !== 0)
+
+	return i
 }

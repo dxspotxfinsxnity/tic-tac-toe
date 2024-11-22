@@ -1,5 +1,5 @@
-import { keys } from "./keys.mjs"
-import { state } from "./state.mjs"
+import { keys } from "./keys.mts"
+import { state } from "./state.mts"
 
 const character = ["", "", "", " 0 ", " x "]
 const separator = [" | ", " | ", "\n", " | ", " | ", "\n", " | ", " | ", ""]
