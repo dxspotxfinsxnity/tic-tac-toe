@@ -36,8 +36,6 @@ start: do {
 	do {
 		if (TicTacToe()) continue start
 		if (readSync()) break
-		combinations.fill(0)
-		state.fill(0)
 	} while (run())
 } while (run())
 
@@ -74,6 +72,8 @@ function TicTacToe(): boolean {
 		break
 	} while (run() && state.includes(0))
 
+	combinations.fill(0)
+	state.fill(0)
 	return EOF
 }
 
