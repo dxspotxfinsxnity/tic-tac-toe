@@ -34,11 +34,7 @@ start: do {
 	if (c === EXIT) break
 
 	do {
-		if (TicTacToe()) {
-			stdin[0] = 0
-			continue start
-		}
-
+		if (TicTacToe()) continue start
 		if (readSync()) break
 		combinations.fill(0)
 		state.fill(0)
@@ -125,5 +121,10 @@ function options(): number {
 }
 
 function run(): boolean {
-	return readCount !== 1 || stdin[0] !== BACKSPACE
+	if (readCount !== 1 || stdin[0] !== BACKSPACE) {
+		return true
+	}
+
+	stdin[0] = 0 // consume
+	return false
 }
