@@ -70,7 +70,7 @@ function TicTacToe(): boolean {
 		screen[cursor + 1] = GREATER_THAN + v
 		Deno.stdout.writeSync(screen)
 		break
-	} while (run() && state.includes(0))
+	} while (run())
 
 	combinations.fill(0)
 	state.fill(0)
