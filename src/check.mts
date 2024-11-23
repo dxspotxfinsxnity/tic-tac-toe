@@ -7,12 +7,12 @@ export const combinations = new Uint8Array(8)
 /**
  * Checks if the current player's move results in a winning combination.
  *
- * @param expected The current player (-1, 0).
+ * @param expected The current player (3, 4).
  * @param index The current slot where the move has been made.
  * @returns A boolean indicating whether the current move results in a win.
  */
 export function check(expected: number, index: number): boolean {
-	const v = (expected += 4)
+	const v = expected
 
 	expected += expected << 1
 
