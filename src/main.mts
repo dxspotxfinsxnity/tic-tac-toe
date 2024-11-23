@@ -44,6 +44,7 @@ start: do {
 function TicTacToe(): boolean {
 	let count = 9
 	let current = 0
+	let EOF = false
 	let i = 0
 
 	do {
@@ -52,7 +53,7 @@ function TicTacToe(): boolean {
 		Deno.stdout.writeSync(screen)
 
 		if (checked === HEAD_TO_HEAD || current === 0) {
-			if ((i = input()) === -1) return true
+			if ((EOF = (i = input()) === -1)) break
 		} else if (checked === LONE_WOLF) i = generate()
 
 		if (checked === JOIN) continue
@@ -73,7 +74,7 @@ function TicTacToe(): boolean {
 		break
 	} while (run() && state.includes(0))
 
-	return false
+	return EOF
 }
 
 function input(): number {
