@@ -6,6 +6,10 @@ import { render } from "./render.mts"
 import { resources } from "./resources.mts"
 import { state } from "./state.mts"
 
+const t = new TextEncoder()
+const TIE = t.encode("Tie")
+const WINS = t.encode("wins")
+
 const CHECKED = resources[5]
 const OPT_COUNT = 5
 
@@ -13,10 +17,12 @@ const LF = 10
 const RETURN = 13
 const SPACE = 32
 const ZERO = 48
-const GREATER_THAN = 62
 const ARROW_UP = 65
 const ARROW_DOWN = 66
+const LETTER_X = 120
 const BACKSPACE = 127
+
+const PLAYER = Uint8Array.of(ZERO, LETTER_X)
 
 const JOIN = 0
 const COMMAND_CENTER = 1
@@ -62,12 +68,18 @@ function TicTacToe(): boolean {
 
 		if (!check(v, i)) {
 			if (--count > 0) continue
-			// tie
+			cursor = render(2)
+			screen[cursor] = LF
+			screen.set(TIE, cursor + 1)
+			Deno.stdout.writeSync(screen)
+			break
 		}
 
 		cursor = render(2)
 		screen[cursor] = LF
-		screen[cursor + 1] = GREATER_THAN + v
+		screen[cursor + 1] = PLAYER[v - 3]
+		screen[cursor + 2] = SPACE
+		screen.set(WINS, cursor + 3)
 		Deno.stdout.writeSync(screen)
 		break
 	} while (run())
