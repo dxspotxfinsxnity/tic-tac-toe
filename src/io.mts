@@ -1,3 +1,5 @@
+import { charCodes } from "./charCodes.mts"
+
 Deno.stdin.setRaw(true)
 
 const { columns, rows } = Deno.consoleSize()
@@ -13,4 +15,13 @@ screen[1] = 99
 export function readSync(): boolean {
 	readCount = Deno.stdin.readSync(stdin)
 	return readCount === null
+}
+
+export function run(): boolean {
+	if (readCount !== 1 || stdin[0] !== charCodes.BACKSPACE) {
+		return true
+	}
+
+	stdin[0] = 0 // consume
+	return false
 }
