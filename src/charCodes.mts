@@ -1,0 +1,13 @@
+export const enum charCodes {
+	LF = 10,
+	RETURN = 13,
+	SPACE = 32,
+	ZERO = 48,
+	ARROW_UP = 65,
+	ARROW_DOWN = 66,
+	LEFT_SQUARE_BRACKET = 91,
+	RIGHT_SQUARE_BRACKET = 93,
+	LETTER_X = 120,
+	LINE = 124,
+	BACKSPACE = 127,
+}
